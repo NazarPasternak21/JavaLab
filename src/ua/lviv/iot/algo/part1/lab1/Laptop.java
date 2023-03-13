@@ -25,10 +25,8 @@ public class Laptop {
     }
 
     public void charge() {
-        System.out.println("Charging the battery...");
         batteryLevel = 100;
         batteryLife = 10;
-        System.out.println("Done. Battery level: " + batteryLevel + "%.");
     }
 
     public static Laptop getInstance() {
@@ -36,14 +34,15 @@ public class Laptop {
     }
 
     public static void main(String[] args) {
-        Laptop[] laptops = new Laptop[4];
-        laptops[0] = new Laptop();
-        laptops[1] = new Laptop("Acer", 15.6, 16, 512, 10, 100);
-        laptops[2] = getInstance();
-        laptops[3] = getInstance();
+        Laptop[] laptops = {
+                new Laptop(),
+                    new Laptop("Acer", 15.6, 16, 512, 10, 100),
+                    getInstance(),
+                    getInstance()
+        };
 
-        for (int i = 0; i < laptops.length; i++) {
-            System.out.println("Laptop " + (i + 1) + ": " + laptops[i].toString());
+        for (Laptop laptop : laptops) {
+            System.out.println(laptop.toString());
         }
     }
 }
