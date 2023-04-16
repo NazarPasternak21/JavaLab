@@ -1,7 +1,9 @@
 package ua.lviv.iot.algo.part1.lab1;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LaptopManager {
     private final List<Laptop> laptops;
@@ -9,46 +11,48 @@ public class LaptopManager {
     public LaptopManager() {
         laptops = new ArrayList<>();
     }
+        public void addLaptopToList(final Laptop laptop) {
+            laptops.add(Objects.requireNonNull(laptop, "laptop cannot be null"));
+        }
+        public List<Laptop> findAllWithSameModel(final String model) {
+            return laptops.stream()
+                    .filter(laptop -> Objects.equals(laptop.getModel(), model))
+                    .collect(Collectors.toList());
+        }
+        public List<Laptop> findAllWithSameRam(final int ram) {
+            return laptops.stream()
+                    .filter(laptop -> laptop.getRam() == ram)
+                    .collect(Collectors.toList());
+        }
+        public List<Laptop> findLaptopsWith16GBRam() {
+            return findAllWithSameRam(16);
+        }
+        public List<Laptop> findAsusLaptops() {
+            return findAllWithSameModel("ASUS");
+        }
+        public static void main(String[] args) {
+        LaptopManager manager = new LaptopManager();
+        manager.addLaptopToList(new GamingLaptop("ASUS", 17.3, 32, 1024, 8, 100, "NVIDIA GeForce RTX 3080", 2));
+        manager.addLaptopToList(new GamingLaptop("ACER", 15.6, 8, 512, 6, 100, "NVIDIA GeForce RTX 3050 Ti", 2));
+        manager.addLaptopToList(new Ultrabook("ASUS", 15.6, 8, 512, 12, 100, 1.8, 1.7));
+        manager.addLaptopToList(new Ultrabook("Lenovo", 15.6, 16, 1024, 12, 100, 1.8, 1.7));
+        manager.addLaptopToList(new OfficeLaptop("Lenovo", 17.3, 16, 1024, 6, 100, "black", 25000));
+        manager.addLaptopToList(new OfficeLaptop("ACER", 15.6, 8, 512, 8, 1002, "white", 16000));
+        manager.addLaptopToList(new StudentLaptop("Lenovo", 15.6, 16, 1024, 8, 100, "Intel Core i5-10300h", "China"));
+        manager.addLaptopToList(new StudentLaptop("ASUS", 17.3, 32, 1024, 12, 100, "Intel Core i7-1165G7 ", "China"));
 
-    public void addLaptop(final Laptop laptop) {
-        laptops.add(laptop);
-    }
-
-    public void findAllWithSameModel(String model) {
-        System.out.println("\nLaptops with the model: " + model + ":");
-        laptops.stream().filter(v -> (Objects.equals(v.getModel(), model))).forEach(System.out::println);
-    }
-
-    public void findAllWithSameRam(int ram) {
-        System.out.println("Laptops with RAM " + ram + ":");
-        laptops.stream().filter(v -> (Objects.equals(v.getRam(), ram))).forEach(System.out::println);
-    }
-
-    public void run() {
-        addLaptop(new GamingLaptop("ASUS", 17.3, 32, 1024, 8, 100, "NVIDIA GeForce RTX 3080", 2));
-        addLaptop(new GamingLaptop("ACER", 15.6, 8, 512, 6, 100, "NVIDIA GeForce RTX 3050 Ti", 2));
-        addLaptop(new Ultrabook("ASUS", 15.6, 8, 512, 12, 100, 1.8, 1.7));
-        addLaptop(new Ultrabook("Lenovo", 15.6, 16, 1024, 12, 100, 1.8, 1.7));
-        addLaptop(new OfficeLaptop("Lenovo", 17.3, 16, 1024, 6, 100, "black", 25000));
-        addLaptop(new OfficeLaptop("ACER", 15.6, 8, 512, 8, 1002, "white", 16000));
-        addLaptop(new StudentLaptop("Lenovo", 15.6, 16, 1024, 8, 100, "Intel Core i5-10300h", "China"));
-        addLaptop(new StudentLaptop("ASUS", 17.3, 32, 1024, 12, 100, "Intel Core i7-1165G7 ", "China"));
-
-        for (var laptop : laptops) {
-            System.out.println(laptop);
-            System.out.println(laptop.replaceBattery(10));
+        for (Laptop laptop : manager.laptops) {
+            System.out.println(laptop.toString());
         }
 
-        findAllWithSameRam(16);
-        findAllWithSameModel("ASUS");
-    }
+        System.out.println("\nLaptops with 16GB RAM:");
+        for (Laptop laptop : manager.findLaptopsWith16GBRam()) {
+            System.out.println(laptop.toString());
+        }
 
-    public static void main(String[] args) {
-        LaptopManager laptopManager = new LaptopManager();
-        laptopManager.run();
+        System.out.println("\nASUS laptops:");
+        for (Laptop laptop : manager.findAsusLaptops()) {
+            System.out.println(laptop.toString());
+        }
     }
-    public List<Laptop> getLaptops() {
-        return new ArrayList<>(laptops);
-    }
-
 }
