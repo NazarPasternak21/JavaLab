@@ -1,23 +1,34 @@
 package ua.lviv.iot.algo.part1.lab1;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class GamingLaptop extends Laptop {
-    private String graphicsProcessor;
-    private int FansNumber;
 
-    public GamingLaptop(String model, double screenSize, int ram, int storage, int batteryLife, int batteryLevel,
-                        String graphicsProcessor, int FansNumber) {
-        super(model,screenSize,ram,storage,batteryLife,batteryLevel);
+    private String graphicsProcessor;
+
+    private int fansNumber;
+
+    public GamingLaptop(final String model, final double screenSize, final int ram, final int storage,
+                        final int batteryLife, final int batteryLevel, final String graphicsProcessor,
+                        final int fansNumber) {
+        super(model, screenSize, ram, storage, batteryLife, batteryLevel);
         this.graphicsProcessor = graphicsProcessor;
-        this.FansNumber = FansNumber;
+        this.fansNumber = fansNumber;
     }
 
-    public boolean replaceBattery(int capacityInHours) {
-        this.batteryLife = capacityInHours;
+    @Override
+    public boolean replaceBattery(final int newCapacity) {
+        this.setBatteryLife(newCapacity);
+        this.setBatteryLevel(BATTERY_LEVEL_FULL);
         return true;
     }
+
+    private static final int BATTERY_LEVEL_FULL = 100;
 }
