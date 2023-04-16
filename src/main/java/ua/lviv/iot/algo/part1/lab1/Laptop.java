@@ -12,11 +12,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public abstract class Laptop {
+
     private String model;
+
     private double screenSize;
+
     private int ram;
+
     private int storage;
-    public int batteryLife;
+
+    private int batteryLife;
+
     private int batteryLevel;
 
     public abstract boolean replaceBattery(int capacityInHours);
