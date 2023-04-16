@@ -1,25 +1,34 @@
 package ua.lviv.iot.algo.part1.lab1;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class OfficeLaptop extends Laptop {
-    private String color;
-    private double price;
+public final class OfficeLaptop extends Laptop {
 
+    private String laptopColor;
 
-    public OfficeLaptop(String model, double screenSize, int ram, int storage, int batteryLife, int batteryLevel, String color, int price) {
-        super(model, screenSize, ram, storage, batteryLevel, batteryLife);
-        this.color = color;
-        this.price = price;
+    private double laptopPrice;
+
+    public OfficeLaptop(final String model, final double screenSize, final int ram, final int storage,
+                        final int batteryLife, final int batteryLevel, final String laptopColor,
+                        final double laptopPrice) {
+        super(model, screenSize, ram, storage, batteryLife, batteryLevel);
+        this.laptopColor = laptopColor;
+        this.laptopPrice = laptopPrice;
     }
 
     @Override
-    public boolean replaceBattery(int capacityInHours) {
-        this.setBatteryLife(capacityInHours);
-        this.setBatteryLevel(100);
+    public boolean replaceBattery(final int newCapacity) {
+        this.setBatteryLife(newCapacity);
+        this.setBatteryLevel(BATTERY_LEVEL_FULL);
         return true;
     }
+
+    private static final int BATTERY_LEVEL_FULL = 100;
 }
