@@ -25,5 +25,16 @@ public abstract class Laptop {
 
     private int batteryLevel;
 
+    private static final String Headers = "model, screenSize, RAM, storage, batteryLife, batteryLevel";
+
+    public String getHeaders() {
+        return Headers;
+    }
+
+    public String toCSV() {
+        return model + ", " + screenSize + ", " + ram + ", "
+                + storage + ", " + batteryLife + ", " + batteryLevel;
+    }
+
     public abstract boolean replaceBattery(int capacityInHours);
 }
