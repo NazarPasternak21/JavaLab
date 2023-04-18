@@ -1,5 +1,6 @@
 package ua.lviv.iot.algo.part1.lab1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,7 +31,7 @@ public class LaptopManager {
         public List<Laptop> findAsusLaptops() {
             return findAllWithSameModel("ASUS");
         }
-        public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         LaptopManager manager = new LaptopManager();
         manager.addLaptopToList(new GamingLaptop("ASUS", 17.3, 32, 1024, 8, 100, "NVIDIA GeForce RTX 3080", 2));
         manager.addLaptopToList(new GamingLaptop("ACER", 15.6, 8, 512, 6, 100, "NVIDIA GeForce RTX 3050 Ti", 2));
@@ -54,5 +55,8 @@ public class LaptopManager {
         for (Laptop laptop : manager.findAsusLaptops()) {
             System.out.println(laptop.toString());
         }
+
+        LaptopWriter writer = new LaptopWriter();
+        writer.writeToFile(manager.laptops);
     }
 }
