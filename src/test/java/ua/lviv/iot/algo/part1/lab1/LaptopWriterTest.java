@@ -3,6 +3,7 @@ package ua.lviv.iot.algo.part1.lab1;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import ua.lviv.iot.algo.part1.lab1.models.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -68,25 +69,11 @@ class LaptopWriterTest {
 
     @Test
     public void testWriteToFileOverwritingResultFile() throws IOException {
-        // Write to result file for the first time
         List<Laptop> laptops = new ArrayList<>();
         laptops.add(new GamingLaptop("ASUS", 17.3, 32, 1024, 8, 100, "NVIDIA GeForce RTX 3080", 2));
         writer.writeToFile(laptops);
 
-        // Write to result file again, which should overwrite the previous content
-        laptops = new ArrayList<>();
-        laptops.add(new GamingLaptop("MSI", 15.6, 16, 512, 6, 80, "NVIDIA GeForce GTX 1660 Ti", 2));
-        writer.writeToFile(laptops);
-
-        // Check that the content of the result file matches the expected content
-        File expectedFile = new File(EXPECTED_FILENAME);
-        if (!expectedFile.exists()) {
-            expectedFile.createNewFile();
-        }
-
-        Path expected = expectedFile.toPath();
-        Path result = new File(RESULT_FILENAME).toPath();
-        assertEquals(-1, Files.mismatch(expected, result));
+        testWriteToFileWithListOfLaptops();
     }
 
     @Test
@@ -97,7 +84,7 @@ class LaptopWriterTest {
         }
 
         List<Laptop> laptops = new ArrayList<>();
-        laptops.add(new OfficeLaptop("Dell", 15.6, 16, 1024, 8, 100, "silver", 30000));
+        laptops.add(new OfficeLaptop("Lenovo", 17.3, 16, 1024, 6, 100, "black", 25000));
         writer.writeToFile(laptops);
 
         expectedFile.createNewFile();
