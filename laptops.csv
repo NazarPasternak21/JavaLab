@@ -1,0 +1,25 @@
+model, screenSize, RAM, storage, batteryLife, batteryLevel,  numberOfFans, graphicsProcessor 
+
+ASUS, 17.3, 32, 1024, 8, 100, 2, NVIDIA GeForce RTX 3080
+
+ACER, 15.6, 8, 512, 6, 100, 2, NVIDIA GeForce RTX 3050 Ti
+
+model, screenSize, RAM, storage, batteryLife, batteryLevel, weight, thickness 
+
+ASUS, 15.6, 8, 512, 100, 12, 1.8, 1.7
+
+Lenovo, 15.6, 16, 1024, 100, 12, 1.8, 1.7
+
+model, screenSize, RAM, storage, batteryLife, batteryLevel, laptopColor, laptopPrice 
+
+Lenovo, 17.3, 16, 1024, 6, 100,black,25000.0
+
+ACER, 15.6, 8, 512, 8, 1002,white,16000.0
+
+model, screenSize, RAM, storage, batteryLife, batteryLevel, processor, producingCountry 
+
+Lenovo, 15.6, 16, 1024, 8, 100, Intel Core i5-10300h, China
+
+ASUS, 17.3, 32, 1024, 12, 100, Intel Core i7-1165G7 , China
+
+
