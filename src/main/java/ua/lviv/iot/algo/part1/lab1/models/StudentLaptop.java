@@ -1,4 +1,4 @@
-package ua.lviv.iot.algo.part1.lab1;
+package ua.lviv.iot.algo.part1.lab1.models;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +15,9 @@ public final class StudentLaptop extends Laptop {
 
     private String producingCountry;
 
+    private static String headers ="processor, producingCountry \n";
+
+
     public StudentLaptop(final String model, final double screenSize, final int ram, final int storage,
                          final int batteryLife, final int batteryLevel, final String processor,
                          final String producingCountry) {
@@ -22,6 +25,17 @@ public final class StudentLaptop extends Laptop {
         this.processor = processor;
         this.producingCountry = producingCountry;
     }
+
+    @Override
+    public String getHeaders() {
+        return super.getHeaders() + ", " + headers;
+    }
+
+    @Override
+    public String toCSV() {
+        return  super.toCSV() + ", " + processor + ", " + producingCountry + "\n";
+    }
+
 
     @Override
     public boolean replaceBattery(final int newCapacity) {
